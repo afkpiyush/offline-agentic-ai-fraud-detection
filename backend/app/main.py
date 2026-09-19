@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.logger import setup_logging, logger
 from app.api.health import router as health_router
+from app.api.ingestion import router as ingestion_router
 
 
 @asynccontextmanager
@@ -36,6 +37,8 @@ app.add_middleware(
 )
 
 app.include_router(health_router, tags=["Health"])
+app.include_router(ingestion_router, prefix="/api", tags=["Ingestion"])
+
 
 
 @app.get("/")
